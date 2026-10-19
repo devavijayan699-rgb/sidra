@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -10,12 +11,17 @@ import styles from "./SiteHeader.module.css";
 import { departmentsOverview } from "@/data/departments";
 
 export default function SiteHeader() {
+  const [mounted, setMounted] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [departmentsDropdownOpen, setDepartmentsDropdownOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { scrollTo, stop, start } = useLenis();
   const pathname = usePathname();
   const dropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleDropdownEnter = () => {
     if (dropdownTimeoutRef.current) {
@@ -262,88 +268,97 @@ export default function SiteHeader() {
         </div>
       </div>
 
-      {/* Mobile Drawer Backdrop */}
-      <div
-        className={`${styles.mobileOverlay} ${mobileMenuOpen ? styles.overlayActive : ""}`}
-        onClick={closeMenu}
-        aria-hidden="true"
-      />
+      {/* Mobile Drawer & Backdrop Portaled to document.body */}
+      {mounted &&
+        createPortal(
+          <>
+            <div
+              className={`${styles.mobileOverlay} ${
+                mobileMenuOpen ? styles.overlayActive : ""
+              }`}
+              onClick={closeMenu}
+              aria-hidden="true"
+            />
 
-      {/* Mobile Slide-Over Navigation Drawer */}
-      <div
-        id="mobile-navigation-drawer"
-        className={`${styles.mobileDrawer} ${mobileMenuOpen ? styles.drawerActive : ""}`}
-        role="dialog"
-        aria-modal="true"
-        aria-label="Mobile Navigation Menu"
-      >
-        <div className={styles.drawerHeader}>
-          <Image
-            src="/assets/sidra-logo.webp"
-            alt="Sidra Foundation"
-            width={110}
-            height={37}
-            style={{ objectFit: "contain" }}
-          />
-          <button
-            type="button"
-            className={styles.drawerCloseBtn}
-            onClick={closeMenu}
-            aria-label="Close menu"
-          >
-            &times;
-          </button>
-        </div>
+            <div
+              id="mobile-navigation-drawer"
+              className={`${styles.mobileDrawer} ${
+                mobileMenuOpen ? styles.drawerActive : ""
+              }`}
+              role="dialog"
+              aria-modal="true"
+              aria-label="Mobile Navigation Menu"
+            >
+              <div className={styles.drawerHeader}>
+                <Image
+                  src="/assets/sidra-logo.webp"
+                  alt="Sidra Foundation"
+                  width={110}
+                  height={37}
+                  style={{ objectFit: "contain" }}
+                />
+                <button
+                  type="button"
+                  className={styles.drawerCloseBtn}
+                  onClick={closeMenu}
+                  aria-label="Close menu"
+                >
+                  &times;
+                </button>
+              </div>
 
-        <nav className={styles.drawerLinks} aria-label="Mobile Navigation Links">
-          <Link
-            href="/"
-            className={isHome ? styles.activeDrawerLink : ""}
-            onClick={(e) => handleNavClick(e, "/")}
-          >
-            Home
-          </Link>
-          <Link
-            href="/about"
-            className={isAbout ? styles.activeDrawerLink : ""}
-            onClick={(e) => handleNavClick(e, "/about")}
-          >
-            About
-          </Link>
-          <Link
-            href="/departments"
-            className={isDepartments ? styles.activeDrawerLink : ""}
-            onClick={(e) => handleNavClick(e, "/departments")}
-          >
-            Departments
-          </Link>
-          <Link
-            href="/news"
-            className={isNews ? styles.activeDrawerLink : ""}
-            onClick={(e) => handleNavClick(e, "/news")}
-          >
-            Blogs &amp; News
-          </Link>
-          <Link
-            href="/#contact"
-            onClick={(e) => handleNavClick(e, "/#contact")}
-          >
-            Contact
-          </Link>
-        </nav>
+              <nav className={styles.drawerLinks} aria-label="Mobile Navigation Links">
+                <Link
+                  href="/"
+                  className={isHome ? styles.activeDrawerLink : ""}
+                  onClick={(e) => handleNavClick(e, "/")}
+                >
+                  Home
+                </Link>
+                <Link
+                  href="/about"
+                  className={isAbout ? styles.activeDrawerLink : ""}
+                  onClick={(e) => handleNavClick(e, "/about")}
+                >
+                  About
+                </Link>
+                <Link
+                  href="/departments"
+                  className={isDepartments ? styles.activeDrawerLink : ""}
+                  onClick={(e) => handleNavClick(e, "/departments")}
+                >
+                  Departments
+                </Link>
+                <Link
+                  href="/news"
+                  className={isNews ? styles.activeDrawerLink : ""}
+                  onClick={(e) => handleNavClick(e, "/news")}
+                >
+                  Blogs &amp; News
+                </Link>
+                <Link
+                  href="/#contact"
+                  onClick={(e) => handleNavClick(e, "/#contact")}
+                >
+                  Contact
+                </Link>
+              </nav>
 
-        <div className={styles.drawerFooter}>
-          <Button
-            href="/donate"
-            variant="primary"
-            size="nav"
-            className={styles.mobileDonateBtn}
-            onClick={closeMenu}
-          >
-            Donate Now
-          </Button>
-        </div>
-      </div>
+              <div className={styles.drawerFooter}>
+                <Button
+                  href="/donate"
+                  variant="primary"
+                  size="nav"
+                  className={styles.mobileDonateBtn}
+                  onClick={closeMenu}
+                >
+                  Donate Now
+                </Button>
+              </div>
+            </div>
+          </>,
+          document.body
+        )}
     </header>
   );
 }
