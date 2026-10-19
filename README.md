@@ -1,10 +1,10 @@
 # Sidra Foundation — Official Web Platform
 
-A modern, high-performance, Awwwards-inspired web experience for the **Sidra Foundation**, built with Next.js 16 App Router, React 19, Lenis smooth scrolling, Motion animations, and CSS Modules.
+A modern, high-performance, built with Next.js 16 App Router, React 19, Lenis smooth scrolling, Motion animations, and CSS Modules.
 
 ---
 
-## ✨ Features & Motion Architecture
+##  Features & Motion Architecture
 
 - **Awwwards-Level Motion & Typography**: Staggered character and word reveals via `SplitText`, magnetic interactive elements (`Magnetic`), viewport scroll reveals (`ScrollReveal`), and micro-interactions (`ClickSpark`).
 - **Smooth Inertial Scrolling**: Native-feel 60fps smooth scrolling powered by `@studio-freight/lenis`.
@@ -32,7 +32,7 @@ A modern, high-performance, Awwwards-inspired web experience for the **Sidra Fou
 
 ---
 
-## 📂 Project Structure
+##  Project Structure
 
 ```text
 sidra/
@@ -69,7 +69,7 @@ sidra/
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 
