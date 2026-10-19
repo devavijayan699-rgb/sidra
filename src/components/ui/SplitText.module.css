@@ -1,0 +1,46 @@
+/* ==========================================================================
+   Clean & Minimal SplitText (React Bits Inspired)
+   Editorial Staggered Reveal — Zero Layout Shift (CLS: 0)
+   ========================================================================== */
+
+.splitContainer {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.wordWrapper {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  vertical-align: top;
+  margin-right: 0.28em;
+  padding-bottom: 0.06em;
+  margin-bottom: -0.06em;
+}
+
+.wordWrapper:last-child {
+  margin-right: 0;
+}
+
+.wordToken {
+  display: inline-block;
+  will-change: transform, opacity;
+  opacity: 0;
+  transform: translateY(115%);
+  transition: opacity 0.35s ease-out,
+              transform var(--split-duration, 0.85s) var(--ease-editorial, cubic-bezier(0.19, 1, 0.22, 1));
+}
+
+.splitRevealed .wordToken {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wordToken {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+}

@@ -1,0 +1,150 @@
+/* DepartmentsSection Styles - Minimal & Elegant */
+.departmentsSection {
+  background-color: var(--bg-main);
+  width: 100%;
+}
+
+.departmentsContainer {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 120px var(--gutter);
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.headBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+
+
+.lead {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  max-width: 800px;
+}
+
+/* 4-Column Responsive Grid */
+.deptsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* Minimalist Pale-Green Department Card */
+.deptCard {
+  background-color: var(--brand-soft);
+  border: 1px solid rgba(0, 176, 80, 0.16);
+  border-radius: 20px;
+  padding: 32px;
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: 
+    opacity 0.65s var(--ease-editorial, cubic-bezier(0.16, 1, 0.3, 1)),
+    transform 0.65s var(--ease-editorial, cubic-bezier(0.16, 1, 0.3, 1)),
+    border-color 0.3s var(--ease-out-quint);
+  will-change: transform, opacity;
+}
+
+:global(.revealContainer.revealed) .deptCard {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .deptCard {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .deptCard:hover {
+    transform: translateY(-3px);
+    border-color: rgba(0, 176, 80, 0.4);
+  }
+}
+
+.deptTitle {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.35;
+  color: #222222;
+}
+
+.deptDesc {
+  flex: 1;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #555555;
+}
+
+.exploreLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--brand);
+  text-decoration: none;
+  margin-top: auto;
+  border-radius: 4px;
+  width: fit-content;
+  transition: gap 0.25s var(--ease-out-quint), color 0.25s var(--ease-out-quint);
+}
+
+.exploreLink:hover {
+  gap: 10px;
+  color: var(--brand-hover);
+}
+
+.arrowIcon {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.exploreLink:hover .arrowIcon,
+.deptCard:hover .arrowIcon {
+  transform: translateX(4px);
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1100px) {
+  .deptsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 720px) {
+  .departmentsContainer {
+    padding: 72px var(--gutter);
+    gap: 36px;
+  }
+
+
+
+  .lead {
+    font-size: 15px;
+  }
+
+  .deptsGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .deptCard {
+    padding: 24px;
+    min-height: auto;
+  }
+}

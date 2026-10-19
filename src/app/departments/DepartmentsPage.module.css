@@ -1,0 +1,196 @@
+.deptHeader {
+  padding: 46px var(--gutter) 0;
+  max-width: 1440px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.deptHeaderContent {
+  width: 800px;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.deptTitle {
+  font-weight: 800;
+  font-size: 64px;
+  line-height: 1.05;
+  letter-spacing: -2.24px;
+  color: #111111;
+  margin: 0;
+}
+
+.deptTitle em {
+  font-style: normal;
+  color: var(--brand);
+}
+
+.deptHeaderContent p {
+  font-size: 19px;
+  line-height: 1.65;
+  color: #555555;
+}
+
+.deptList {
+  padding: 56px var(--gutter) 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 1440px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.deptRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background-color: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  overflow: hidden;
+  transition: transform 0.25s var(--ease-out-quint), border-color 0.25s var(--ease-out-quint);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .deptRow:hover {
+    border-color: rgba(0, 176, 80, 0.25);
+    transform: translateY(-2px);
+  }
+}
+
+.deptRow > * {
+  min-width: 0;
+  min-height: 380px;
+}
+
+.deptRowImageWrapper {
+  position: relative;
+  width: 100%;
+  min-height: 380px;
+  overflow: hidden;
+}
+
+.deptRowImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.12);
+  transition: transform 1.05s var(--ease-fluid, cubic-bezier(0.22, 1, 0.36, 1));
+  will-change: transform;
+}
+
+:global(.revealContainer.revealed) .deptRowImage {
+  transform: scale(1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .deptRow:hover .deptRowImage {
+    transform: scale(1.04);
+    transition: transform 0.45s var(--ease-editorial);
+  }
+}
+
+.deptRowText {
+  padding: 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+}
+
+.deptRowNum {
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: -0.2px;
+  color: var(--brand);
+}
+
+.deptRow h2 {
+  font-weight: 700;
+  font-size: 34px;
+  line-height: 1.15;
+  letter-spacing: -0.85px;
+  color: #111111;
+}
+
+.deptRow p {
+  font-size: 17px;
+  line-height: 1.65;
+  color: #555555;
+}
+
+.exploreLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--brand);
+  padding-top: 8px;
+  transition: color 0.2s var(--ease-out-quint);
+}
+
+.exploreLink:hover {
+  color: var(--brand-hover);
+}
+
+.exploreLink img {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.2s var(--ease-out-quint);
+}
+
+.exploreLink:hover img {
+  transform: translateX(4px);
+}
+
+.deptRowRev .deptRowImageWrapper {
+  order: 2;
+}
+
+.deptRowRev .deptRowText {
+  order: 1;
+}
+
+@media (max-width: 1100px) {
+  .deptRow {
+    grid-template-columns: 1fr;
+  }
+
+  .deptRowImageWrapper,
+  .deptRowRev .deptRowImageWrapper {
+    order: 1;
+    min-height: 260px;
+  }
+
+  .deptRowText,
+  .deptRowRev .deptRowText {
+    order: 2;
+  }
+}
+
+@media (max-width: 720px) {
+  .deptHeader {
+    padding-top: 36px;
+  }
+
+  .deptTitle {
+    font-size: 40px;
+    letter-spacing: -1.2px;
+  }
+
+  .deptList {
+    padding-top: 36px;
+  }
+
+  .deptRowText {
+    padding: 32px;
+  }
+
+  .deptRow h2 {
+    font-size: 26px;
+  }
+}

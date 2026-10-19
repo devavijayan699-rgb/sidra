@@ -1,0 +1,152 @@
+.title {
+  display: inline-block;
+  font-weight: 800;
+  font-size: 52px;
+  line-height: 1.05;
+  letter-spacing: -1.56px;
+  color: #111111;
+  margin: 0;
+}
+
+.textWrap {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.28em;
+}
+
+/* Kinetic Masked Line/Word Bounding Box */
+.wordBlock {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: baseline;
+  padding-bottom: 0.06em;
+  margin-bottom: -0.06em;
+}
+
+.wordBlockInner {
+  display: inline-block;
+  transform: translateY(0);
+  opacity: 1;
+  transition: transform 0.82s var(--ease-editorial),
+              opacity 0.35s ease-out;
+  will-change: transform, opacity;
+}
+
+:global(.revealContainer:not(.revealed)) .wordBlockInner {
+  transform: translateY(115%);
+  opacity: 0;
+}
+
+:global(.revealContainer.revealed) .wordBlockInner,
+:global(.revealed) .wordBlockInner,
+.title.standalone .wordBlockInner {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+:global(.revealContainer.revealed) .wordBlock:nth-child(2) .wordBlockInner,
+:global(.revealed) .wordBlock:nth-child(2) .wordBlockInner {
+  transition-delay: 0.06s;
+}
+
+:global(.revealContainer.revealed) .lastWordWrap .wordBlockInner,
+:global(.revealed) .lastWordWrap .wordBlockInner {
+  transition-delay: 0.12s;
+}
+
+.prefix {
+  color: inherit;
+}
+
+.title em {
+  font-style: normal;
+  color: var(--brand);
+}
+
+.leadAccent {
+  color: var(--brand);
+}
+
+.lastWordWrap {
+  display: inline-flex;
+  align-items: flex-end;
+  white-space: nowrap;
+  vertical-align: baseline;
+}
+
+/* Spring-Loaded Green Accent Dot */
+.dotContainer {
+  display: inline-flex;
+  align-items: flex-end;
+  margin-left: var(--dot-gap, 10px);
+  flex-shrink: 0;
+  transform: scale(1);
+  opacity: 1;
+  transition: transform 0.6s var(--ease-spring) 0.36s,
+              opacity 0.25s ease-out 0.36s;
+  will-change: transform, opacity;
+}
+
+:global(.revealContainer:not(.revealed)) .dotContainer {
+  transform: scale(0);
+  opacity: 0;
+}
+
+:global(.revealContainer.revealed) .dotContainer,
+:global(.revealed) .dotContainer,
+.title.standalone .dotContainer {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.titleDot {
+  width: var(--dot-size, 12px);
+  height: var(--dot-size, 12px);
+  margin-bottom: var(--dot-margin, 6px);
+  flex-shrink: 0;
+  display: block;
+}
+
+@media (max-width: 1100px) {
+  .title {
+    font-size: 42px;
+    letter-spacing: -1.2px;
+  }
+
+  .dotContainer {
+    margin-left: calc(var(--dot-gap, 10px) * 0.8);
+  }
+
+  .titleDot {
+    width: calc(var(--dot-size, 12px) * 0.85);
+    height: calc(var(--dot-size, 12px) * 0.85);
+    margin-bottom: calc(var(--dot-margin, 6px) * 0.85);
+  }
+}
+
+@media (max-width: 720px) {
+  .title {
+    font-size: 32px;
+    letter-spacing: -0.96px;
+  }
+
+  .dotContainer {
+    margin-left: 8px;
+  }
+
+  .titleDot {
+    width: 9px;
+    height: 9px;
+    margin-bottom: 4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wordBlockInner,
+  .dotContainer {
+    transform: none !important;
+    opacity: 1 !important;
+    transition: none !important;
+  }
+}

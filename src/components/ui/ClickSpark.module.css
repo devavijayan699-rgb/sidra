@@ -1,0 +1,25 @@
+/* ==========================================================================
+   Clean & Minimal ClickSpark (React Bits Inspired)
+   Micro-haptic tactile sparks in Sidra Emerald
+   ========================================================================== */
+
+.sparkWrapper {
+  position: relative;
+  display: inline-flex;
+}
+
+.sparkCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sparkCanvas {
+    display: none !important;
+  }
+}

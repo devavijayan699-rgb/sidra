@@ -1,0 +1,125 @@
+/* ImpactStats Styles */
+.impactSection {
+  padding: 120px var(--gutter);
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.stats {
+  display: flex;
+  flex-direction: column;
+  gap: 72px;
+}
+
+
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px 24px;
+}
+
+.statCell {
+  padding: 28px 0;
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: 
+    opacity 0.65s var(--ease-editorial, cubic-bezier(0.16, 1, 0.3, 1)),
+    transform 0.65s var(--ease-editorial, cubic-bezier(0.16, 1, 0.3, 1));
+  will-change: transform, opacity;
+}
+
+:global(.revealContainer.revealed) .statCell {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .statCell {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-bottom: 18px;
+  border-bottom: 2px solid var(--brand-soft);
+  white-space: nowrap;
+  width: 100%;
+  transition: border-color 0.25s var(--ease-out-quint), transform 0.25s var(--ease-out-quint);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .stat:hover {
+    border-color: var(--brand);
+    transform: translateY(-2px);
+  }
+}
+
+.statNumber {
+  font-weight: 800;
+  font-size: 52px;
+  line-height: 1;
+  letter-spacing: -1.56px;
+  color: var(--brand);
+  font-variant-numeric: tabular-nums;
+  transition: transform 0.25s var(--ease-out-quint);
+}
+
+.stat:hover .statNumber {
+  transform: scale(1.02);
+}
+
+.statLabel {
+  font-weight: 500;
+  font-size: 17px;
+  color: var(--text-secondary);
+  transition: color 0.25s var(--ease-out-quint);
+}
+
+.stat:hover .statLabel {
+  color: #111111;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1024px) {
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px 20px;
+  }
+}
+
+@media (max-width: 720px) {
+  .impactSection {
+    padding: 72px var(--gutter);
+  }
+
+  .stats {
+    gap: 48px;
+  }
+
+
+
+  .statsGrid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .statCell {
+    padding: 14px 0;
+  }
+
+  .statNumber {
+    font-size: 40px;
+  }
+
+  .statLabel {
+    font-size: 15px;
+  }
+}

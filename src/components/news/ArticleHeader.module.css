@@ -1,0 +1,51 @@
+.articleHead {
+  padding: 46px var(--gutter) 0;
+  display: flex;
+  justify-content: center;
+  max-width: 1440px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.articleHeadInner {
+  width: 880px;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+.articleMeta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #888888;
+}
+
+.articleMeta img {
+  width: 4px;
+  height: 4px;
+}
+
+.articleTitle {
+  font-weight: 800;
+  font-size: 64px;
+  line-height: 1.05;
+  letter-spacing: -2.24px;
+  color: #111111;
+  text-align: center;
+}
+
+@media (max-width: 720px) {
+  .articleHead {
+    padding-top: 36px;
+  }
+
+  .articleTitle {
+    font-size: 36px;
+    letter-spacing: -1.2px;
+  }
+}

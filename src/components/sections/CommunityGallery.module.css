@@ -1,0 +1,181 @@
+/* CommunityGallery Styles */
+.gallery {
+  background-color: var(--bg-gallery);
+  overflow: hidden;
+  padding: 120px 0;
+  width: 100%;
+  content-visibility: auto;
+  contain-intrinsic-size: 1440px 520px;
+}
+
+.headingWrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 var(--gutter) 72px;
+}
+
+.galleryTitle {
+  font-weight: 800;
+  font-size: 60px;
+  line-height: 1.1;
+  letter-spacing: -1.8px;
+  color: #e9ecea;
+  width: 1000px;
+  max-width: 100%;
+}
+
+.galleryTitle span {
+  color: #ffffff;
+}
+
+/* Marquee Outer Container */
+.marquee {
+  overflow: hidden;
+  height: 280px;
+  width: 100%;
+  outline: none;
+}
+
+.marqueeTrack {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  animation: marquee 40s linear infinite;
+  will-change: transform;
+}
+
+.marquee:hover .marqueeTrack,
+.marquee:focus-within .marqueeTrack {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-50% - 8px));
+  }
+}
+
+.marqueeGroup {
+  display: flex;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+/* Individual Gallery Card */
+.gcard {
+  position: relative;
+  width: 400px;
+  height: 280px;
+  border-radius: 16px;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: transform 0.35s var(--ease-out-quint), border-color 0.35s var(--ease-out-quint);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .gcard:hover {
+    transform: scale(1.02);
+    border-color: rgba(255, 255, 255, 0.28);
+    z-index: 2;
+  }
+}
+
+.gcardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s var(--ease-out-quint);
+}
+
+.gcard:hover .gcardImage {
+  transform: scale(1.05);
+}
+
+.gcardCap {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 40px 20px 16px;
+  background: linear-gradient(to top, rgba(7, 48, 27, 0.92), rgba(7, 48, 27, 0));
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: -0.14px;
+  pointer-events: none;
+  transition: transform 0.3s var(--ease-out-quint);
+}
+
+.gcard:hover .gcardCap {
+  transform: translateY(-2px);
+}
+
+.capDot {
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  transition: transform 0.25s var(--ease-out-quint);
+}
+
+.gcard:hover .capDot {
+  transform: scale(1.25);
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .marqueeTrack {
+    animation: none;
+  }
+
+  .marquee {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 8px;
+  }
+
+  .gcard {
+    scroll-snap-align: start;
+  }
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1100px) {
+  .galleryTitle {
+    font-size: 46px;
+    letter-spacing: -1.3px;
+  }
+}
+
+@media (max-width: 720px) {
+  .gallery {
+    padding: 72px 0;
+  }
+
+  .headingWrapper {
+    padding: 0 var(--gutter) 40px;
+  }
+
+  .galleryTitle {
+    font-size: 32px;
+    letter-spacing: -1px;
+  }
+
+  .marquee {
+    height: 220px;
+  }
+
+  .gcard {
+    width: 300px;
+    height: 220px;
+  }
+}

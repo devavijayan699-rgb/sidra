@@ -1,0 +1,415 @@
+/* Lenis Smooth Scroll CSS (Inlined to eliminate render-blocking @import roundtrip) */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+
+.lenis [data-lenis-prevent],
+.lenis [data-lenis-prevent-wheel],
+.lenis [data-lenis-prevent-touch],
+.lenis [data-lenis-prevent-vertical],
+.lenis [data-lenis-prevent-horizontal] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+.lenis.lenis-autoToggle {
+  transition-property: overflow;
+  transition-duration: 1ms;
+  transition-behavior: allow-discrete;
+}
+
+:root {
+  --brand: #00b050;
+  --brand-hover: #009944;
+  --brand-soft: #e8f8ef;
+  --bg-main: #ffffff;
+  --bg-alt: #fafbfa;
+  --bg-gallery: #009944;
+  --bg-footer: #111111;
+  --text-primary: #444444;
+  --text-secondary: #666666;
+  --border: rgba(0, 0, 0, 0.06);
+  --border-focus: #00b050;
+  --gutter: 100px;
+  --ease-editorial: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-fluid: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out-quint: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: auto; /* Let Lenis handle smooth scrolling without dual momentum fighting */
+}
+
+/* Specific scroll offset only for contact card which lacks internal top padding */
+#contact {
+  scroll-margin-top: 100px;
+}
+
+body {
+  font-family: var(--font-manrope), 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+button {
+  font-family: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+/* Global Keyboard Focus Accessibility (Awards-level clean offset ring) */
+:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.pageWrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Minimal, High-Precision Button System (No AI Flop, No Harsh Shadows) */
+.btn {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 100px;
+  white-space: nowrap;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: inherit;
+  transition: 
+    background-color 0.25s var(--ease-out-quint),
+    border-color 0.25s var(--ease-out-quint),
+    color 0.25s var(--ease-out-quint),
+    transform 0.25s var(--ease-out-quint);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover {
+    transform: translateY(-2px);
+    will-change: transform;
+  }
+}
+
+.btn:active {
+  transform: translateY(0.5px) scale(0.975);
+  transition-duration: 0.08s;
+}
+
+.btn--primary {
+  background-color: var(--brand);
+  color: #ffffff;
+}
+
+.btn--primary:hover {
+  background-color: var(--brand-hover);
+}
+
+/* Subtle clean light sheen reflection on primary hover */
+.btn--primary::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    transparent 100%
+  );
+  transform: skewX(-20deg);
+  transition: none;
+  pointer-events: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn--primary:hover::before {
+    left: 140%;
+    transition: left 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}
+
+.btn--nav {
+  padding: 12px 28px;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: -0.14px;
+}
+
+.btn--outline {
+  border: 1.5px solid var(--brand);
+  color: var(--brand);
+  padding: 9px 18px;
+  font-weight: 600;
+  font-size: 13px;
+  width: 100%;
+  background-color: transparent;
+}
+
+.btn--outline:hover {
+  background-color: var(--brand-soft);
+  border-color: var(--brand-hover);
+}
+
+.btn--ghost {
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1.5px solid rgba(255, 255, 255, 0.65);
+  color: #ffffff;
+  padding: 12px 24px;
+  font-weight: 600;
+  font-size: 14px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.btn--ghost:hover {
+  background-color: rgba(255, 255, 255, 0.18);
+  border-color: #ffffff;
+}
+
+.btn--lg {
+  padding: 16px 36px;
+  font-size: 15px;
+}
+
+.btn--lg.btn--primary {
+  font-weight: 700;
+}
+
+.btn--lg.btn--ghost {
+  border-color: rgba(255, 255, 255, 0.75);
+  font-weight: 600;
+}
+
+/* Subtle micro-arrow movement inside buttons */
+.btn img,
+.btn svg {
+  transition: transform 0.2s var(--ease-out-quint);
+}
+
+.btn:hover img,
+.btn:hover svg {
+  transform: translateX(2px);
+}
+
+/* Base Utility Classes */
+.section {
+  padding: 120px var(--gutter);
+}
+
+.bg-alt {
+  background-color: var(--bg-alt);
+}
+
+/* Section Reveal Container handled via motion/react */
+.revealSection {
+  width: 100%;
+}
+
+/* Responsive Gutter Breakpoints */
+@media (max-width: 1100px) {
+  :root {
+    --gutter: 40px;
+  }
+}
+
+@media (max-width: 720px) {
+  :root {
+    --gutter: 20px;
+  }
+  .section {
+    padding: 72px var(--gutter);
+  }
+}
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .revealSection,
+  .jsReady .revealSection:not(.isRevealed) {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .btn:hover,
+  .btn:active {
+    transform: none !important;
+  }
+}
+
+/* High-Performance Native Scroll Reveal */
+.revealContainer {
+  opacity: 0;
+  transform: translateY(var(--reveal-y, 18px));
+  transition: opacity 0.65s var(--ease-fluid, cubic-bezier(0.22, 1, 0.36, 1)),
+              transform 0.65s var(--ease-fluid, cubic-bezier(0.22, 1, 0.36, 1));
+  will-change: opacity, transform;
+}
+
+.revealContainer.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger parent containers remain transparent/untransformed so child items cascade visibly */
+.revealContainer.hasStagger {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+/* Cinematic Masked Image Scale Physics */
+.imageRevealWrap,
+.imageUnmaskWrap {
+  overflow: hidden;
+  position: relative;
+}
+
+.imageRevealWrap img,
+.imageRevealInner,
+.imageUnmaskImg {
+  transform: scale(1.12) translate3d(0, 0, 0);
+  transition: transform 1.05s var(--ease-fluid, cubic-bezier(0.22, 1, 0.36, 1));
+  will-change: transform;
+}
+
+.revealContainer.revealed .imageRevealWrap img,
+.revealContainer.revealed .imageRevealInner,
+.revealContainer.revealed .imageUnmaskImg,
+.isRevealed .imageRevealWrap img,
+.isRevealed .imageRevealInner,
+.isRevealed .imageUnmaskImg {
+  transform: scale(1.0) translate3d(0, 0, 0);
+}
+
+/* Kinetic Line Mask Utilities */
+.lineMask {
+  overflow: hidden;
+  display: block;
+}
+
+.lineMaskInner {
+  display: block;
+  transform: translateY(115%);
+  transition: transform 0.85s var(--ease-editorial, cubic-bezier(0.19, 1, 0.22, 1));
+  will-change: transform;
+}
+
+.revealed .lineMaskInner,
+.revealContainer.revealed .lineMaskInner {
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .revealContainer {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .imageRevealWrap img,
+  .imageRevealInner {
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* ==========================================================================
+   Page Transitions & View Transitions API (Awwwards-Level Performance)
+   ========================================================================== */
+
+@view-transition {
+  navigation: auto;
+}
+
+/* Ensure persistent header is extracted into its own stable transition group */
+::view-transition-group(site-header) {
+  animation: none !important;
+  z-index: 1000;
+}
+
+/* Root Page Crossfade & Minimal 6px Translation */
+::view-transition-old(root) {
+  animation: 100ms cubic-bezier(0.22, 1, 0.36, 1) both vtFadeOut;
+}
+
+::view-transition-new(root) {
+  animation: 200ms cubic-bezier(0.22, 1, 0.36, 1) both vtFadeIn;
+}
+
+@keyframes vtFadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes vtFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Main Page Content Container */
+.mainContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
