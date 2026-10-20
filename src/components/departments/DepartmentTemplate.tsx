@@ -97,16 +97,8 @@ export default function DepartmentTemplate({ data }: DepartmentTemplateProps) {
           </div>
           <motion.div
             className={styles.ddHeaderImgWrapper}
-            initial={
-              shouldReduceMotion
-                ? { opacity: 1, scale: 1 }
-                : { opacity: 0, scale: 1.05 }
-            }
-            whileInView={
-              shouldReduceMotion
-                ? { opacity: 1, scale: 1 }
-                : { opacity: 1, scale: 1 }
-            }
+            initial={{ opacity: shouldReduceMotion ? 1 : 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true, margin: "-30px" }}
             transition={{
               duration: 0.85,

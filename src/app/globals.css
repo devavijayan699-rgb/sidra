@@ -306,7 +306,7 @@ button {
   transition: none;
 }
 
-/* Cinematic Masked Image Scale Physics */
+/* Image Reveal Physics */
 .imageRevealWrap,
 .imageUnmaskWrap {
   overflow: hidden;
@@ -316,9 +316,7 @@ button {
 .imageRevealWrap img,
 .imageRevealInner,
 .imageUnmaskImg {
-  transform: scale(1.12) translate3d(0, 0, 0);
-  transition: transform 1.05s var(--ease-fluid, cubic-bezier(0.22, 1, 0.36, 1));
-  will-change: transform;
+  transform: translate3d(0, 0, 0);
 }
 
 .revealContainer.revealed .imageRevealWrap img,
@@ -327,7 +325,7 @@ button {
 .isRevealed .imageRevealWrap img,
 .isRevealed .imageRevealInner,
 .isRevealed .imageUnmaskImg {
-  transform: scale(1.0) translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
 }
 
 /* Kinetic Line Mask Utilities */

@@ -73,12 +73,11 @@
   overflow: hidden;
   flex-shrink: 0;
   border: 1px solid rgba(255, 255, 255, 0.12);
-  transition: transform 0.35s var(--ease-out-quint), border-color 0.35s var(--ease-out-quint);
+  transition: border-color 0.35s var(--ease-out-quint);
 }
 
 @media (hover: hover) and (pointer: fine) {
   .gcard:hover {
-    transform: scale(1.02);
     border-color: rgba(255, 255, 255, 0.28);
     z-index: 2;
   }
@@ -89,11 +88,6 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.5s var(--ease-out-quint);
-}
-
-.gcard:hover .gcardImage {
-  transform: scale(1.05);
 }
 
 .gcardCap {
@@ -123,11 +117,6 @@
   height: 8px;
   flex-shrink: 0;
   border-radius: 50%;
-  transition: transform 0.25s var(--ease-out-quint);
-}
-
-.gcard:hover .capDot {
-  transform: scale(1.25);
 }
 
 /* Reduced Motion Support */

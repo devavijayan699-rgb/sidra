@@ -113,7 +113,7 @@
   overflow: hidden;
   border: 1px solid rgba(0, 0, 0, 0.08);
   opacity: 0;
-  transform: translateY(16px) scale(0.97);
+  transform: translateY(16px);
   transition: 
     opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
     transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
@@ -123,25 +123,25 @@
 
 :global(.revealContainer.revealed) .c1 {
   opacity: 1;
-  transform: translateY(0) scale(1);
+  transform: translateY(0);
   transition-delay: 0.1s;
 }
 
 :global(.revealContainer.revealed) .c2 {
   opacity: 1;
-  transform: translateY(0) scale(1);
+  transform: translateY(0);
   transition-delay: 0.2s;
 }
 
 :global(.revealContainer.revealed) .c3 {
   opacity: 1;
-  transform: translateY(0) scale(1);
+  transform: translateY(0);
   transition-delay: 0.3s;
 }
 
 @media (hover: hover) and (pointer: fine) {
   .collageImg:hover {
-    transform: scale(1.025) translateY(-2px);
+    transform: translateY(-2px);
     border-color: rgba(0, 0, 0, 0.16);
     z-index: 5;
   }

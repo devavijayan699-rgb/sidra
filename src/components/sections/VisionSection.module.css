@@ -107,11 +107,6 @@
 }
 
 .goalCard:hover .goalIcon {
-  background-color: #d8f5e3;
-  transform: scale(1.08) rotate(3deg);
-}
-
-.goalCard:hover .goalIcon {
   background-color: #def6e6;
 }
 

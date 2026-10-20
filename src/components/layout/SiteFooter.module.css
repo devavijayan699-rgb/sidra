@@ -45,8 +45,7 @@
 
 @media (hover: hover) and (pointer: fine) {
   .footerLogo:hover {
-    opacity: 0.95;
-    transform: scale(1.02);
+    opacity: 0.85;
   }
 }
 
