@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,18 +10,16 @@ import { useLenis } from "@/components/providers/SmoothScrollProvider";
 import styles from "./SiteHeader.module.css";
 import { departmentsOverview } from "@/data/departments";
 
+const emptySubscribe = () => () => {};
+
 export default function SiteHeader() {
-  const [mounted, setMounted] = useState(false);
+  const mounted = useSyncExternalStore(emptySubscribe, () => true, () => false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [departmentsDropdownOpen, setDepartmentsDropdownOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { scrollTo, stop, start } = useLenis();
   const pathname = usePathname();
   const dropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const handleDropdownEnter = () => {
     if (dropdownTimeoutRef.current) {

@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "node --max-old-space-size=4096 ./node_modules/next/dist/bin/next build --webpack",
     "start": "next start",
-    "lint": "node --max-old-space-size=4096 ./node_modules/eslint/bin/eslint.js src"
+    "lint": "node --max-old-space-size=4096 ./node_modules/eslint/bin/eslint.js src",
+    "type-check": "tsc --noEmit",
+    "validate": "npm run type-check && npm run lint"
   },
   "dependencies": {
     "gsap": "^3.15.0",
